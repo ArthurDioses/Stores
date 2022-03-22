@@ -2,10 +2,32 @@ package com.dioses.stores
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
+import com.dioses.stores.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnClickListener {
+    private lateinit var mBinding: ActivityMainBinding
+    private lateinit var mAdapter: StoreAdapter
+    private lateinit var mGridLayout: GridLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
+        setuprecyclerView()
+    }
+
+    private fun setuprecyclerView() {
+        mAdapter = StoreAdapter(mutableListOf(), this)
+        mGridLayout = GridLayoutManager(this, 2)
+        mBinding.recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = mGridLayout
+            adapter = mAdapter
+        }
+    }
+
+    override fun onClick(store: Store) {
+
     }
 }
