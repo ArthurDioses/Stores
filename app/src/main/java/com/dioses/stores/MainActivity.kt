@@ -19,10 +19,10 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             mAdapter.add(store)
 
         }
-        setuprecyclerView()
+        setupRecyclerView()
     }
 
-    private fun setuprecyclerView() {
+    private fun setupRecyclerView() {
         mAdapter = StoreAdapter(mutableListOf(), this)
         mGridLayout = GridLayoutManager(this, 2)
         mBinding.recyclerView.apply {
