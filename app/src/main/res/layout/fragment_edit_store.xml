@@ -67,7 +67,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:maxLength="@integer/lines_url_website"
                 android:minLines="@integer/lines_url_website"
                 android:textAppearance="?attr/textAppearanceCaption"
                 android:textColor="@color/color_link" />

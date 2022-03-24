@@ -59,8 +59,23 @@ class EditStoreFragment : Fragment() {
         doAsync {
             mStoreEntity = StoreApplication.database.storeDao().getStoreById(id)
             uiThread {
-
+                if (mStoreEntity != null) {
+                    setUiStore(mStoreEntity!!)
+                }
             }
+        }
+    }
+
+    private fun setUiStore(storeEntity: StoreEntity) {
+        with(mBinding) {
+            etName.setText(storeEntity.name)
+            etPhone.setText(storeEntity.phone)
+            etWebsite.setText(storeEntity.webSite)
+            etPhotoUrl.setText(storeEntity.photoUrl)
+            Glide.with(requireActivity())
+                .load(storeEntity.photoUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(mBinding.imgPhoto)
         }
     }
 
