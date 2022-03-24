@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+        /*
         mBinding.btnSave.setOnClickListener {
             val store = StoreEntity(name = mBinding.etName.text.toString().trim())
             Thread {
@@ -25,7 +26,22 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             mAdapter.add(store)
 
         }
+        */
+
+        mBinding.fab.setOnClickListener {
+            launchEditFragment()
+        }
+
         setupRecyclerView()
+    }
+
+    private fun launchEditFragment() {
+        val fragment = EditStoreFragment()
+        val fragmentManage = supportFragmentManager
+        val fragmentTransaction = fragmentManage.beginTransaction()
+        fragmentTransaction.add(R.id.containerMain, fragment)
+        fragmentTransaction.commit()
+        mBinding.fab.hide()
     }
 
     private fun setupRecyclerView() {
