@@ -5,6 +5,8 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import com.dioses.stores.databinding.FragmentEditStoreBinding
 import com.google.android.material.snackbar.Snackbar
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class EditStoreFragment : Fragment() {
 
@@ -42,11 +44,22 @@ class EditStoreFragment : Fragment() {
                 true
             }
             R.id.action_save -> {
-                Snackbar.make(
-                    mBinding.root,
-                    getString(R.string.edit_store_message_save_success),
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                val store =
+                    StoreEntity(
+                        name = mBinding.etName.toString().trim(),
+                        phone = mBinding.etPhone.toString().trim(),
+                        webSite = mBinding.etWebsite.toString().trim()
+                    )
+                doAsync {
+                    StoreApplication.database.storeDao().addStore(store)
+                    uiThread {
+                        Snackbar.make(
+                            mBinding.root,
+                            getString(R.string.edit_store_message_save_success),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
