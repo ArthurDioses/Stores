@@ -35,14 +35,17 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         setupRecyclerView()
     }
 
-    private fun launchEditFragment() {
+    private fun launchEditFragment(args: Bundle? = null) {
         val fragment = EditStoreFragment()
+        if (args != null) fragment.arguments = args
+
         val fragmentManage = supportFragmentManager
         val fragmentTransaction = fragmentManage.beginTransaction()
+
         fragmentTransaction.add(R.id.containerMain, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-        //mBinding.fab.hide()
+
         hideFab()
     }
 
@@ -66,8 +69,10 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         }
     }
 
-    override fun onClick(storeEntity: StoreEntity) {
-
+    override fun onClick(storeId: Long) {
+        val args = Bundle()
+        args.putLong(getString(R.string.arg_id), storeId)
+        launchEditFragment(args)
     }
 
     override fun onFavoriteStore(storeEntity: StoreEntity) {
