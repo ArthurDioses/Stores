@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 data class StoreEntity(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     var name: String,
-    var phone: String = "",
+    var phone: String,
     var webSite: String = "",
+    var photoUrl: String,
     var favorite: Boolean = false
 )
