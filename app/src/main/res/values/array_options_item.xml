@@ -6,7 +6,4 @@
         <item>@string/option_item_go_to_website</item>
     </string-array>
 
-    <string name="option_item_delete">Eliminar</string>
-    <string name="option_item_call">Llamar</string>
-    <string name="option_item_go_to_website">Ir al sitio web</string>
 </resources>
