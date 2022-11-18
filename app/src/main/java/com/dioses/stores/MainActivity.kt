@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
                 when (i) {
                     0 -> confirmDelete(storeEntity)
                     1 -> dial(storeEntity.phone)
-                    2 -> Toast.makeText(this, "Sitio web...", Toast.LENGTH_SHORT).show()
+                    2 -> goToWebsite(storeEntity.webSite)
                 }
             })
             .show()
@@ -128,6 +128,18 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
             data = Uri.parse("tel:$phone")
         }
         startActivity(callIntent)
+    }
+
+    private fun goToWebsite(website: String) {
+        if (website.isEmpty()) {
+            Toast.makeText(this, R.string.main_error_no_website, Toast.LENGTH_SHORT).show()
+        } else {
+            val websiteIntent = Intent().apply {
+                action = Intent.ACTION_VIEW
+                data = Uri.parse(website)
+            }
+            startActivity(websiteIntent)
+        }
     }
 
     /*
