@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.dioses.stores.databinding.FragmentEditStoreBinding
+import com.google.android.material.snackbar.Snackbar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -38,7 +39,8 @@ class EditStoreFragment : Fragment() {
             mIsEditMode = true
             getStore(id)
         } else {
-            Toast.makeText(activity, id.toString(), Toast.LENGTH_SHORT).show()
+            mIsEditMode = false
+            mStoreEntity = StoreEntity(name = "", phone = "", photoUrl = "")
         }
 
         mActivity = activity as? MainActivity
@@ -90,6 +92,8 @@ class EditStoreFragment : Fragment() {
                 true
             }
             R.id.action_save -> {
+                if (mStoreEntity != null) {
+                    /*
                 val store =
                     StoreEntity(
                         name = mBinding.etName.text.toString().trim(),
@@ -97,22 +101,44 @@ class EditStoreFragment : Fragment() {
                         webSite = mBinding.etWebsite.text.toString().trim(),
                         photoUrl = mBinding.etPhotoUrl.text.toString().trim()
                     )
-                doAsync {
-                    store.id = StoreApplication.database.storeDao().addStore(store)
-                    uiThread {
-                        mActivity?.addStore(store)
+                */
+                    with(mStoreEntity!!) {
+                        name = mBinding.etName.text.toString().trim()
+                        phone = mBinding.etPhone.text.toString().trim()
+                        webSite = mBinding.etWebsite.text.toString().trim()
+                        photoUrl = mBinding.etPhotoUrl.text.toString().trim()
+                    }
+                    doAsync {
+                        if (mIsEditMode) StoreApplication.database.storeDao()
+                            .updateStore(mStoreEntity!!)
+                        else mStoreEntity!!.id =
+                            StoreApplication.database.storeDao().addStore(mStoreEntity!!)
 
-                        hideKeyboard()
+                        uiThread {
 
-                        Toast.makeText(
-                            mActivity,
-                            R.string.edit_store_message_save_success,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        mActivity?.onBackPressed()
+                            hideKeyboard()
+                            if (mIsEditMode) {
+                                mActivity?.updateStore(mStoreEntity!!)
+                                Snackbar.make(
+                                    mBinding.root,
+                                    R.string.edit_store_message_update_success,
+                                    Snackbar.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                mActivity?.addStore(mStoreEntity!!)
+
+                                Toast.makeText(
+                                    mActivity,
+                                    R.string.edit_store_message_save_success,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                mActivity?.onBackPressed()
+                            }
+                        }
                     }
                 }
                 true
+
             }
             else -> super.onOptionsItemSelected(item)
         }
