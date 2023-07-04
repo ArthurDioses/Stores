@@ -96,13 +96,13 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
 
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.dialog_options_title)
-            .setItems(items, { dialogInterface, i ->
+            .setItems(items) { _, i ->
                 when (i) {
                     0 -> confirmDelete(storeEntity)
                     1 -> dial(storeEntity.phone)
                     2 -> goToWebsite(storeEntity.webSite)
                 }
-            })
+            }
             .show()
 
     }
@@ -110,14 +110,14 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
     private fun confirmDelete(storeEntity: StoreEntity) {
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.dialog_delete_title)
-            .setPositiveButton(R.string.dialog_delete_confirm, { dialogInterface, i ->
+            .setPositiveButton(R.string.dialog_delete_confirm) { _, _ ->
                 doAsync {
                     StoreApplication.database.storeDao().deleteStore(storeEntity)
                     uiThread {
                         mAdapter.delete(storeEntity)
                     }
                 }
-            })
+            }
             .setNegativeButton(R.string.dialog_delete_cancel, null)
             .show()
     }
