@@ -24,4 +24,8 @@
     <string name="option_item_delete">Eliminar</string>
     <string name="option_item_call">Llamar</string>
     <string name="option_item_go_to_website">Ir al sitio web</string>
+
+    <string name="dialog_exit_title">¿Salir de esta pantalla?</string>
+    <string name="dialog_exit_message">Si no ha guardado cambios, se perderán</string>
+    <string name="dialog_exit_ok">Salir</string>
 </resources>
