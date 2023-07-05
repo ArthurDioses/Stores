@@ -14,7 +14,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.dioses.stores.databinding.FragmentEditStoreBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -56,7 +55,7 @@ class EditStoreFragment : Fragment() {
         mActivity = activity as? MainActivity
         mActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mActivity?.supportActionBar?.title =
-            if (mIsEditMode) getString(R.string.esit_store_title_add) else getString(R.string.edit_store_title_edit)
+            if (mIsEditMode) getString(R.string.edit_store_title_edit) else getString(R.string.edit_store_title_add)
 
         setHasOptionsMenu(true)
     }
@@ -142,15 +141,6 @@ class EditStoreFragment : Fragment() {
                         mBinding.tilName
                     )
                 ) {
-                    /*
-                val store =
-                    StoreEntity(
-                        name = mBinding.etName.text.toString().trim(),
-                        phone = mBinding.etPhone.text.toString().trim(),
-                        webSite = mBinding.etWebsite.text.toString().trim(),
-                        photoUrl = mBinding.etPhotoUrl.text.toString().trim()
-                    )
-                */
                     with(mStoreEntity!!) {
                         name = mBinding.etName.text.toString().trim()
                         phone = mBinding.etPhone.text.toString().trim()
@@ -209,26 +199,6 @@ class EditStoreFragment : Fragment() {
             R.string.edit_store_message_valid,
             Snackbar.LENGTH_SHORT
         ).show()
-        return isValid
-    }
-
-    private fun validateFields(): Boolean {
-        var isValid = true
-        if (mBinding.etPhotoUrl.text.toString().isEmpty()) {
-            mBinding.tilPhotoUrl.error = getString(R.string.helper_required)
-            mBinding.etPhotoUrl.requestFocus()
-            isValid = false
-        }
-        if (mBinding.etPhone.text.toString().isEmpty()) {
-            mBinding.tilPhone.error = getString(R.string.helper_required)
-            mBinding.etPhone.requestFocus()
-            isValid = false
-        }
-        if (mBinding.etName.text.toString().isEmpty()) {
-            mBinding.tilName.error = getString(R.string.helper_required)
-            mBinding.etName.requestFocus()
-            isValid = false
-        }
         return isValid
     }
 

@@ -7,7 +7,7 @@
     <string name="hint_phone">Cell Phone</string>
     <string name="hint_website">Website Url</string>
     <string name="photo_url">Image Url</string>
-    <string name="esit_store_title_add">Create Store</string>
+    <string name="edit_store_title_add">Create Store</string>
     <string name="menu_save">Save</string>
     <string name="edit_store_message_save_success">Store successfully Added</string>
     <string name="arg_id" translatable="false">key_id</string>

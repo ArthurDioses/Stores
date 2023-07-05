@@ -25,7 +25,7 @@ class StoreAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val store = stores.get(position)
+        val store = stores[position]
         with(holder) {
             setListener(store)
             binding.tvName.text = store.name
@@ -40,6 +40,7 @@ class StoreAdapter(
     }
 
     override fun getItemCount(): Int = stores.size
+
     fun add(storeEntity: StoreEntity) {
         if (!stores.contains(storeEntity)) {
             stores.add(storeEntity)
@@ -55,7 +56,7 @@ class StoreAdapter(
     fun update(storeEntity: StoreEntity) {
         val index = stores.indexOf(storeEntity)
         if (index != -1) {
-            stores.set(index, storeEntity)
+            stores[index] = storeEntity
             notifyItemChanged(index)
         }
     }

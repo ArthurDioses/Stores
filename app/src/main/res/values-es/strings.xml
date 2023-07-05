@@ -8,7 +8,7 @@
     <string name="hint_phone">Teléfono</string>
     <string name="hint_website">Url del sitio web</string>
     <string name="photo_url">Url de la imagen</string>
-    <string name="esit_store_title_add">Crear Tienda</string>
+    <string name="edit_store_title_add">Crear Tienda</string>
     <string name="menu_save">Guardae</string>
     <string name="edit_store_message_save_success">Tienda agregada correctamente</string>
     <string name="edit_store_message_update_success">Tienda actualizada</string>
